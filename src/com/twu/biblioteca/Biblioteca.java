@@ -21,7 +21,7 @@ public class Biblioteca {
 
     public String checkoutBook(String title, Book[] books) {
         for (Book book: books) {
-            if (book.getTitle() == title && book.getIsAvailable()) {
+            if (book.getTitle().equals(title) && book.getIsAvailable()) {
                 book.setIsAvailable(false);
                 System.out.println("Thank you! Enjoy the book");
                 return "Success";
@@ -33,7 +33,7 @@ public class Biblioteca {
 
     public String returnBook(String title, Book[] books) {
         for (Book book: books) {
-            if (book.getTitle() == title && book.getIsAvailable() == false) {
+            if (book.getTitle().equals(title) && !book.getIsAvailable()) {
                 book.setIsAvailable(true);
                 System.out.println("Thank you for returning the book");
                 return "Success";
