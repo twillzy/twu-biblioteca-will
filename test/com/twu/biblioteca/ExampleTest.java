@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class ExampleTest {
 
@@ -72,5 +73,42 @@ public class ExampleTest {
         books[2] = new Book("Understanding Meteor", "Nicola Mele", "2014", true);
         Biblioteca biblioteca = new Biblioteca();
         assertEquals(biblioteca.returnBook("Harry", books), "Failure");
+    }
+
+    @Test
+    public void createNewMovie() {
+        assertNotNull(new Movie("Titanic", "1997", "James Cameron", "10", true));
+    }
+
+    @Test
+    public void getMovieDetails() {
+        Movie movie = new Movie("Titanic", "1997", "James Cameron", "10", true);
+        assertEquals(movie.getName(), "Titanic");
+    }
+
+    @Test
+    public void setMovieAvailability() {
+        Movie movie = new Movie("Titanic", "1997", "James Cameron", "10", true);
+        movie.setIsAvailable(false);
+        assertFalse(movie.getIsAvailable());
+    }
+
+    @Test
+    public void checkoutExistingMovie() {
+        Movie movie = new Movie("Titanic", "1997", "James Cameron", "10", true);
+        Movie[] movies = new Movie[1];
+        movies[0] = movie;
+        Biblioteca biblioteca = new Biblioteca();
+        assertEquals(biblioteca.checkoutMovie("Titanic", movies), "Success");
+        assertFalse("Failure- movie is not available", movie.getIsAvailable());
+    }
+
+    @Test
+    public void checkoutNonExistingMovie() {
+        Movie movie = new Movie("Titanic", "1997", "James Cameron", "10", true);
+        Movie[] movies = new Movie[1];
+        movies[0] = movie;
+        Biblioteca biblioteca = new Biblioteca();
+        assertEquals(biblioteca.checkoutMovie("Harry Potter", movies), "Failure");
     }
 }
