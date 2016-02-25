@@ -32,10 +32,11 @@ public class Biblioteca {
         }
     }
 
-    public String checkoutBook(String title, Book[] books) {
+    public String checkoutBook(String title, Book[] books, String libraryNo) {
         for (Book book: books) {
             if (book.getTitle().equals(title) && book.getIsAvailable()) {
                 book.setIsAvailable(false);
+                book.setBorrowedBy(libraryNo);
                 System.out.println("Thank you! Enjoy the book");
                 return "Success";
             }
@@ -44,9 +45,9 @@ public class Biblioteca {
         return "Failure";
     }
 
-    public String returnBook(String title, Book[] books) {
+    public String returnBook(String title, Book[] books, String libraryNo) {
         for (Book book: books) {
-            if (book.getTitle().equals(title) && !book.getIsAvailable()) {
+            if (book.getTitle().equals(title) && !book.getIsAvailable() && book.getBorrowedBy().equals(libraryNo)) {
                 book.setIsAvailable(true);
                 System.out.println("Thank you for returning the book");
                 return "Success";
@@ -66,5 +67,27 @@ public class Biblioteca {
         }
         System.out.println("That movie is not available");
         return "Failure";
+    }
+
+    public boolean userLogin(String libraryNo, String password, User[] users) {
+        for (User user: users) {
+            if (user.getLibraryNo().equals(libraryNo) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void listUserDetails(String libraryNo, User[] users) {
+        String leftAlignFormat = "| %-15s | %-25s | %-12s %n";
+
+        System.out.format("+-----------------+---------------------------+-----------------%n");
+        System.out.format("| Name            | Email                     | Phone Number    %n");
+        System.out.format("+-----------------+---------------------------+-----------------%n");
+        for (User user: users) {
+            if (user.getLibraryNo().equals(libraryNo)) {
+                System.out.format(leftAlignFormat, user.getName(), user.getEmail(), user.getPhone());
+            }
+        }
     }
 }

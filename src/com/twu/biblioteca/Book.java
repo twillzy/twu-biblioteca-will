@@ -6,12 +6,21 @@ public class Book {
     private String author;
     private String yearPublished;
     private boolean isAvailable;
+    private String borrowedBy;
 
     public Book(String newTitle, String newAuthor, String newYearPublished, boolean newIsAvailable) {
         title = newTitle;
         author = newAuthor;
         yearPublished = newYearPublished;
         isAvailable = newIsAvailable;
+    }
+
+    public Book(String newTitle, String newAuthor, String newYearPublished, boolean newIsAvailable, String libraryNo) {
+        title = newTitle;
+        author = newAuthor;
+        yearPublished = newYearPublished;
+        isAvailable = newIsAvailable;
+        borrowedBy = libraryNo;
     }
 
     public String getTitle() {
@@ -32,5 +41,13 @@ public class Book {
 
     public void setIsAvailable(boolean newIsAvailable) {
         isAvailable = newIsAvailable;
+    }
+
+    public String getBorrowedBy() {
+        return borrowedBy;
+    }
+
+    public void setBorrowedBy(String newBorrowedBy) {
+        borrowedBy = newBorrowedBy;
     }
 }
